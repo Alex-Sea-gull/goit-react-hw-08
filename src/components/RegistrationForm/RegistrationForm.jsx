@@ -1,7 +1,6 @@
 import { Form, Field, Formik } from "formik";
 import * as Yup from "yup";
-import s from "./LoginForm.module.css";
-import { Link } from "react-router-dom";
+import s from "./RegistrationForm.module.css";
 
 const orderSchema = Yup.object({
   email: Yup.string()
@@ -44,13 +43,6 @@ const LoginForm = () => {
           <button type="submit" className={s.button}>
             Log in
           </button>
-          <p className={s.goToLogin}>
-            You do not have account?{" "}
-            <Link to="/register" className={s.goToLoginLink}>
-              {" "}
-              Lets create one!
-            </Link>
-          </p>
         </Form>
       </Formik>
     </div>
