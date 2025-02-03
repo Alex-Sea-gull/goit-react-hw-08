@@ -3,23 +3,23 @@ import * as Yup from "yup";
 import s from "./LoginForm.module.css";
 import { Link } from "react-router-dom";
 
-const orderSchema = Yup.object({
-  email: Yup.string()
-    .email("Invalid email format")
-    .min(3, "Minimum 3 characters")
-    .max(50, "Maximum 50 characters")
-    .required("Must be filled"),
-  password: Yup.string()
-    .min(3, "Minimum 3 characters")
-    .max(50, "Maximum 50 characters")
-    .required("Password is required"),
-});
-
 const LoginForm = () => {
-  const initialValues = {
-    password: "",
-    email: "",
-  };
+  const orderSchema = Yup.object({
+    name: Yup.string()
+      .min(3, "Minimum 3 characters")
+      .max(50, "Maximum 50 characters")
+      .required("Name is required"),
+    email: Yup.string()
+      .email("Invalid email format")
+      .min(3, "Minimum 3 characters")
+      .max(50, "Maximum 50 characters")
+      .required("Must be filled"),
+    password: Yup.string()
+      .min(3, "Minimum 7 characters")
+      .max(50, "Maximum 50 characters")
+      .required("Password is required"),
+  });
+
   const handleSubmit = (values, options) => {
     console.log(values);
     options.resetForm();
@@ -28,9 +28,9 @@ const LoginForm = () => {
   return (
     <div className={s.wrapperLoginForm}>
       <Formik
-        initialValues={initialValues}
-        onSubmit={handleSubmit}
+        initialValues={{ email: "", password: "" }}
         validationSchema={orderSchema}
+        onSubmit={handleSubmit}
       >
         <Form>
           <label className={s.label}>

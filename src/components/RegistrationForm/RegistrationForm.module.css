@@ -42,3 +42,16 @@
 .button:hover {
     background: #0056b3;
 }
+
+.goToLoginLink {
+    padding-top: 5px;
+    display: inline-block;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.goToLoginLink:hover {
+    text-decoration: underline;
+}
