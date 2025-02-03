@@ -1,12 +1,13 @@
 import { Form, Field, Formik } from "formik";
 import * as Yup from "yup";
 import s from "./RegistrationForm.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerThunk } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const orderSchema = Yup.object({
     name: Yup.string()
@@ -26,7 +27,10 @@ const RegistrationForm = () => {
 
   const handleRegister = (values, options) => {
     console.log(values);
-    dispatch(registerThunk(values));
+    dispatch(registerThunk(values))
+      .unwrap()
+      .then(() => navigate("/"));
+
     options.resetForm();
   };
 

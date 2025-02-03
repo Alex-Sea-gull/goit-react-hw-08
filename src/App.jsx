@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div>
-      {isLoading && (
+      {/* {isLoading && (
         <p style={{ color: "blue", fontSize: "18px", fontWeight: "bold" }}>
           Loading...
         </p>
@@ -35,7 +35,7 @@ function App() {
         <p style={{ color: "red", fontSize: "18px", fontWeight: "bold" }}>
           Error
         </p>
-      )}
+      )} */}
 
       <Routes>
         <Route path="/" element={<Layout />}>
