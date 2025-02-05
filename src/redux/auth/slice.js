@@ -30,7 +30,9 @@ const slice = createSlice({
 
         });
 
-        builder.addCase(logoutThunk.fulfilled, () => initialState);
+        builder.addCase(logoutThunk.fulfilled, () => {
+            return initialState;
+        })
     },
 
 });

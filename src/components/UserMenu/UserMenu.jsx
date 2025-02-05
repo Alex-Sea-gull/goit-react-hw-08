@@ -2,13 +2,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/selectors";
 import s from "./UserMenu.module.css";
 import { logoutThunk } from "../../redux/auth/operations";
+import { useNavigate } from "react-router-dom";
 
 const UserMenu = () => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUser);
+  const navigate = useNavigate();
 
-  const handleExit = () => {
-    dispatch(logoutThunk());
+  const handleExit = async () => {
+    try {
+      await dispatch(logoutThunk());
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
