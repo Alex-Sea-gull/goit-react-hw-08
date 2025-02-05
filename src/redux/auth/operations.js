@@ -40,6 +40,7 @@ export const logoutThunk = createAsyncThunk(
     "auth/logout",
     async (_, thunkApi) => {
         try {
+            await axios.post('/users/logout');
             localStorage.removeItem("token");
             delete axios.defaults.headers.common["Authorization"];
             return;

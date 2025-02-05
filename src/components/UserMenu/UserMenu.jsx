@@ -15,7 +15,7 @@ const UserMenu = () => {
     <div className={s.userMenu}>
       <h2 className={s.greeting}>Hello! {userName.name}</h2>
       <button onClick={handleExit} className={s.exitButton}>
-        Exit
+        Logout
       </button>
     </div>
   );
