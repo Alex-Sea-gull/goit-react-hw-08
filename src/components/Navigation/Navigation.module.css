@@ -1,0 +1,23 @@
+.navigation {
+    display: flex;
+    justify-content: center;
+}
+
+.link {
+    font-weight: 600;
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.link:hover {
+    color: darkblue;
+    transform: scale(1.1);
+}
+
+.activeLink {
+    text-decoration: underline;
+    color: blue;
+    font-size: 20px;
+}

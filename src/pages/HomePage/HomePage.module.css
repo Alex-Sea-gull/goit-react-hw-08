@@ -1,0 +1,11 @@
+.container {
+    padding: 30px;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.welcome {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}

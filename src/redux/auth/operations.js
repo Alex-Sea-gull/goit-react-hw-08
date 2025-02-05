@@ -35,3 +35,16 @@ export const loginThunk = createAsyncThunk(
         }
     }
 );
+
+export const logoutThunk = createAsyncThunk(
+    "auth/logout",
+    async (_, thunkApi) => {
+        try {
+            localStorage.removeItem("token");
+            delete axios.defaults.headers.common["Authorization"];
+            return;
+        } catch (error) {
+            return thunkApi.rejectWithValue(error.message);
+        }
+    }
+);

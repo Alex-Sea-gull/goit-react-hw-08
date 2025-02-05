@@ -4,8 +4,6 @@ import { useEffect } from "react";
 // import ContactList from "./components/ContactList/ContactList";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDataThunk } from "./redux/contactsOps";
-import { selectError, selectLoading } from "./redux/contactsSlice";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
@@ -13,6 +11,8 @@ import ContactPage from "./pages/ContactPage/ContactPage";
 import Layout from "./components/Layout/Layout";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import { selectError, selectLoading } from "./redux/contacts/selectors";
+import { fetchDataThunk } from "./redux/contacts/operations";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,10 +40,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="contact" element={<ContactPage />} />
+          <Route path="/contacts" element={<ContactPage />} />
         </Route>
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

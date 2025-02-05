@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import s from "./ContactForm.module.css";
 import CustomField from "../CustomField/CustomField";
 import { useDispatch } from "react-redux";
-import { addContactThunk } from "../../redux/contactsOps";
+import { addContactThunk } from "../../redux/contacts/operations";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
