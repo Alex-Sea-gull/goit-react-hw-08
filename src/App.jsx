@@ -3,7 +3,7 @@ import { useEffect } from "react";
 // import SearchBox from "./components/SearchBox/SearchBox";
 // import ContactList from "./components/ContactList/ContactList";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
@@ -14,39 +14,35 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import { selectError, selectLoading } from "./redux/contacts/selectors";
 import { fetchDataThunk } from "./redux/contacts/operations";
 import { refreshUserThunk } from "./redux/auth/operations";
+import { selectIsRefreshing } from "./redux/auth/selectors";
+import Loader from "./components/Loader/Loader";
 
 function App() {
   const dispatch = useDispatch();
-
+  const isRefreshing = useSelector(selectIsRefreshing);
   // const isError = useSelector(selectError);
   // const isLoading = useSelector(selectLoading);
 
   useEffect(() => {
+    // dispatch(fetchDataThunk());
     dispatch(refreshUserThunk());
   }, [dispatch]);
 
   return (
     <div>
-      {/* {isLoading && (
-        <p style={{ color: "blue", fontSize: "18px", fontWeight: "bold" }}>
-          Loading...
-        </p>
+      {isRefreshing ? (
+        <Loader />
+      ) : (
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/contacts" element={<ContactPage />} />
+          </Route>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       )}
-      {isError && (
-        <p style={{ color: "red", fontSize: "18px", fontWeight: "bold" }}>
-          Error
-        </p>
-      )} */}
-
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/contacts" element={<ContactPage />} />
-        </Route>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
     </div>
   );
 }

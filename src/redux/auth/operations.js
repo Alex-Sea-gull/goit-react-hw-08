@@ -69,7 +69,7 @@ export const refreshUserThunk = createAsyncThunk(
         }
 
         setAuthHeader(savedtoken);
-        console.log(savedtoken);
+        // console.log(savedtoken);
 
         try {
             const { data } = await goitApi.get('/users/current');
