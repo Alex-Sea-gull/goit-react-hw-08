@@ -25,7 +25,7 @@ const LoginForm = () => {
     console.log(values);
     dispatch(loginThunk(values))
       .unwrap()
-      .then(() => navigate("/"));
+      .then(() => navigate("/contacts"));
     options.resetForm();
   };
 

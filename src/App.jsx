@@ -3,7 +3,7 @@ import { useEffect } from "react";
 // import SearchBox from "./components/SearchBox/SearchBox";
 // import ContactList from "./components/ContactList/ContactList";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
@@ -13,15 +13,16 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import { selectError, selectLoading } from "./redux/contacts/selectors";
 import { fetchDataThunk } from "./redux/contacts/operations";
+import { refreshUserThunk } from "./redux/auth/operations";
 
 function App() {
   const dispatch = useDispatch();
 
-  const isError = useSelector(selectError);
-  const isLoading = useSelector(selectLoading);
+  // const isError = useSelector(selectError);
+  // const isLoading = useSelector(selectLoading);
 
   useEffect(() => {
-    dispatch(fetchDataThunk());
+    dispatch(refreshUserThunk());
   }, [dispatch]);
 
   return (
