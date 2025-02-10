@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { loginThunk, logoutThunk, refreshUserThunk, registerThunk } from "./operations";
 import { updateContactThunk } from "../contacts/operations";
 
+
 const initialState = {
     user: {
         name: null,
@@ -44,17 +45,6 @@ const slice = createSlice({
 
             .addCase(refreshUserThunk.rejected, () => initialState)
 
-            .addCase(updateContactThunk.fulfilled, (state, action) => {
-                state.contacts.items = state.contacts.items.map(item =>
-                    item.id === action.payload.id
-                        ? {
-                            ...item,
-                            name: action.payload.name,
-                            number: action.payload.number,
-                        }
-                        : item
-                );
-            })
     },
 
 });

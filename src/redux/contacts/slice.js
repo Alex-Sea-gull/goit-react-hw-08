@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addContactThunk, deleteContactThunk, fetchDataThunk } from "./operations";
+import { addContactThunk, deleteContactThunk, fetchDataThunk, updateContactThunk } from "./operations";
 
 // Масив для зберігання контактів
 const initialState = {
@@ -13,6 +13,13 @@ const initialState = {
 const contactSlice = createSlice({
     name: "contacts",
     initialState,
+    reducers: {
+        clearContacts: (state) => {
+            state.items = [];
+            state.loading = false;
+            state.error = null;
+        }
+    },
     extraReducers: (builder) => {
         builder
             // Обробка fetchDataThunk
@@ -62,8 +69,21 @@ const contactSlice = createSlice({
                 state.error = action.payload;
                 state.loading = false;
             })
+
+            .addCase(updateContactThunk.fulfilled, (state, action) => {
+                state.items = state.items.map(item =>
+                    item.id === action.payload.id
+                        ? {
+                            ...item,
+                            name: action.payload.name,
+                            number: action.payload.number,
+                        }
+                        : item
+                );
+            })
     }
 })
 
 
 export const contactsReducer = contactSlice.reducer
+export const { clearContacts } = contactSlice.actions;
