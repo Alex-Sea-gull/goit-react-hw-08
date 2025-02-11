@@ -14,7 +14,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import { selectError, selectLoading } from "./redux/contacts/selectors";
 import { fetchDataThunk } from "./redux/contacts/operations";
 import { refreshUserThunk } from "./redux/auth/operations";
-import { selectIsRefreshing } from "./redux/auth/selectors";
+import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
 import Loader from "./components/Loader/Loader";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
@@ -22,11 +22,14 @@ import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(fetchDataThunk());
+    }
     dispatch(refreshUserThunk());
-    dispatch(fetchDataThunk());
-  }, [dispatch]);
+  }, [dispatch, isLoggedIn]);
 
   return (
     <div>
