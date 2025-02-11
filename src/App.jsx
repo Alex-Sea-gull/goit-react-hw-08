@@ -12,7 +12,7 @@ import Layout from "./components/Layout/Layout";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import { selectError, selectLoading } from "./redux/contacts/selectors";
-import { fetchDataThunk } from "./redux/contacts/operations";
+// import { fetchDataThunk } from "./redux/contacts/operations";
 import { refreshUserThunk } from "./redux/auth/operations";
 import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
 import Loader from "./components/Loader/Loader";
@@ -22,14 +22,10 @@ import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(fetchDataThunk());
-    }
     dispatch(refreshUserThunk());
-  }, [dispatch, isLoggedIn]);
+  }, [dispatch]);
 
   return (
     <div>

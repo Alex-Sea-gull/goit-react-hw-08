@@ -38,7 +38,6 @@ export const loginThunk = createAsyncThunk(
             const { token } = data;
             localStorage.setItem('token', token);
             setAuthHeader(data.token);
-            thunkApi.dispatch(fetchDataThunk());
             return data;
         } catch (error) {
             return thunkApi.rejectWithValue(error.message);
@@ -68,12 +67,10 @@ export const refreshUserThunk = createAsyncThunk(
     'auth/refresh',
     async (_, thunkApi) => {
         let token = thunkApi.getState().auth.token;
-        if (!token) {
-            token = localStorage.getItem("token");
-        }
+
 
         if (!token) {
-            return thunkApi.rejectWithValue("Token не найден");
+            return thunkApi.rejectWithValue("Token не найдено");
         }
 
         setAuthHeader(token);
