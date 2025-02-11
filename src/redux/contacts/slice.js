@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addContactThunk, deleteContactThunk, fetchDataThunk, updateContactThunk } from "./operations";
+import { logoutThunk } from "../auth/operations";
 
 // Масив для зберігання контактів
 const initialState = {
@@ -81,6 +82,12 @@ const contactSlice = createSlice({
                         : item
                 );
             })
+
+            .addCase(logoutThunk.fulfilled, (state) => {
+                state.items = [];
+                state.loading = false;
+                state.error = null;
+            });
     }
 })
 
