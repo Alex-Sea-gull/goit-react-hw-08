@@ -11,14 +11,10 @@ import {
 
 const ContactPage = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    if (isLoggedIn && !isRefreshing) {
-      dispatch(fetchDataThunk());
-    }
-  }, [dispatch, isLoggedIn, isRefreshing]);
+    dispatch(fetchDataThunk());
+  }, [dispatch]);
 
   return (
     <div>

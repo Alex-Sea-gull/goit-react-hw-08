@@ -3,7 +3,6 @@ import axios from "axios";
 import { clearContacts } from "../contacts/slice";
 import { fetchDataThunk } from "../contacts/operations";
 
-// axios.defaults.baseURL = "https://connections-api.goit.global/";
 
 export const goitApi = axios.create({
     baseURL: "https://connections-api.goit.global/",
@@ -11,6 +10,10 @@ export const goitApi = axios.create({
 
 const setAuthHeader = token => {
     goitApi.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+};
+
+const clearAuthHeader = () => {
+    delete goitApi.defaults.headers.common["Authorization"];
 };
 
 export const registerThunk = createAsyncThunk(
@@ -53,6 +56,7 @@ export const logoutThunk = createAsyncThunk(
             await goitApi.post('/users/logout');
             localStorage.removeItem("token");
             delete goitApi.defaults.headers.common["Authorization"];
+            clearAuthHeader();
             thunkApi.dispatch(clearContacts());
             localStorage.removeItem("token");
             return;
